@@ -21,7 +21,9 @@ init_server(#task{callback = Callback} = Task, Stats) ->
   Options = [
     {pool, default},
     {timeout, ?TIMEOUT},
-    {insecure, ?Config(allow_insecure_connection, false)}
+    {insecure, ?Config(allow_insecure_connection, false)},
+    {follow_redirect, true},
+    {max_redirect, 5}
   ],
   Request = prepare_request(Task, Stats),
   case hackney:post(Callback, Headers, Request, Options) of
