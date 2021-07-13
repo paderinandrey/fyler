@@ -27,7 +27,7 @@ init_server(#task{callback = Callback} = Task, Stats) ->
   ],
   Request = prepare_request(Task, Stats),
   case hackney:post(Callback, Headers, Request, Options) of
-    {ok, Status, _, _} when Status >= 200, Status < 300 ->
+    {ok, Status, _, _} when Status >= 200, Status < 400 ->
       ?I({successfull_callback, Callback, Status}),
       exit(normal);
     {ok, Status, _, _} ->
